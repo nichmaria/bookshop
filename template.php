@@ -53,18 +53,16 @@
     </p>
 
     <div class="container">
-        <?php
-        foreach ($id as $i) {
-        ?><div class="item">
-                <img src="<?php echo $image[$i]; ?>" alt="kitten" width="190px">
+        <?php foreach ($booksinfo as $number) { ?>
+            <div class="item">
+                <img src="<?php echo $number['image']; ?>" alt="kitten" width="190px">
                 <?php
-                echo $title[$i];
+                echo $number['title'];
                 echo "<br>";
-                echo $author[$i];
+                echo $number['author'];
                 ?>
-            </div><?php
-                }
-                    ?>
+            </div>
+        <?php } ?>
     </div>
 
 </body>
