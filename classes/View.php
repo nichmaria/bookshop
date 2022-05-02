@@ -1,7 +1,7 @@
 <?php
 class View
 {
-    public function render($template, $booksinfo)
+    public function render(string $template, array $data): string
     {
         ob_start();
         include $template;
@@ -10,8 +10,8 @@ class View
         return $content;
     }
 
-    public function display($template, $booksinfo)
+    public function display(string $template, array $data)
     {
-        echo $this->render($template, $booksinfo);
+        echo $this->render($template, $data);
     }
 }

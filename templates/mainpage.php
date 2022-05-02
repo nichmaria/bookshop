@@ -13,17 +13,15 @@
             width: 100%;
             height: 100%;
             padding: 0;
+            background-color: #FFF5EE;
         }
+
 
         .item {
             padding: 20px;
-            /* Поля */
-            background: #F8F8FF;
-            /* Цвет фона */
-            border: 2px solid #DDA0DD;
-            /* Параметры рамки */
-            width: 200px;
-
+            background: #FFDAB9;
+            border: 4px solid #BC8F8F;
+            width: 250px;
             margin: 40px;
         }
 
@@ -53,13 +51,15 @@
     </p>
 
     <div class="container">
-        <?php foreach ($booksinfo as $number) { ?>
+        <?php foreach ($data['books'] as $book) { ?>
             <div class="item">
-                <img src="<?php echo $number['image']; ?>" alt="kitten" width="190px">
+                <img src="<?php echo $book['image']; ?>" alt="kitten" width="230px">
                 <?php
-                echo $number['title'];
+                echo '<a href="secondpage.php?id=' . $book['id'] . '">' . $book['title'] . '</a>';
                 echo "<br>";
-                echo $number['author'];
+                echo $book['author'];
+                echo "<br>";
+                echo $book['price'];
                 ?>
             </div>
         <?php } ?>
