@@ -9,7 +9,7 @@ class DataBase
         $this->dbh = new PDO($dsn, $login, $password);
     }
 
-    public function getAll(): array
+    public function getAllBooks(): array
     {
         $sql = 'SELECT * FROM books';
         $this->sth = $this->dbh->prepare($sql);
@@ -38,5 +38,18 @@ class DataBase
         }
 
         return $this->sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function saveComment(string $name, string $comment, int $id)
+    {
+        $sql = "INSERT INTO `bookshop`.`feedback` (`bookid`, `name`, `opinion`) 
+        VALUES ('$id', '$name', '$comment');";
+        $this->sth = $this->dbh->prepare($sql);
+
+        try {
+            $this->sth->execute();
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
     }
 }

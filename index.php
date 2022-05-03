@@ -6,7 +6,7 @@ require __DIR__ . '/classes/BookStorage.php';
 
 $dsn = 'mysql:host=127.0.0.1;dbname=bookshop';
 $database = new DataBase($dsn, 'root', '');
-$bookData = $database->getAll();
+$bookData = $database->getAllBooks();
 $bookStorage = new BookStorage($bookData);
 $books = $bookStorage->getBooks();
 
