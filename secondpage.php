@@ -14,6 +14,11 @@ if (!empty($_POST['comment']) && !empty($_POST['name'])) {
     $database->saveComment($_POST['name'], $_POST['comment'], (int)$_GET['id']);
 }
 
+if (!empty($_POST['id'])) {
+    $database->deleteComment((int)$_POST['id']);
+    //echo 'DELETED', $_POST['id'];
+}
+
 $feedback = $database->getFeedback((int)$_GET['id']);
 $data = ['book' => $book, 'feedback' => $feedback];
 

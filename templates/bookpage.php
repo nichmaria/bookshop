@@ -23,18 +23,22 @@
             <p>
                 <?php foreach ($data['feedback'] as $onerecord) {
                     echo "<b>" . $onerecord['name'] . "</b>";
-                    echo "<br>";
-                    echo  $onerecord['opinion'];
-                    echo "<br>";
-                } ?>
-            </p>
-            <p>
+                    echo ':';
+                    echo  $onerecord['opinion']; ?>
             <form action="secondpage.php?id=<?php echo $data['book']['id']; ?>" method="post">
-                <input type="string" name="name" class="search">
-                <input type="string" name="comment" class="search">
-                <input type="submit" value="отправить" class="search">
+                <input type="checkbox" name="id" value="<?php echo $onerecord['id']; ?>" />
+                <input type="submit" value="delete comment" />
             </form>
-            </p>
+        <?php echo "<br>";
+                } ?>
+        </p>
+        <p>
+        <form action="secondpage.php?id=<?php echo $data['book']['id']; ?>" method="post">
+            <input type="string" value="имя" name="name" class="search">
+            <input type="string" value="ваш отзыв" name="comment" class="search">
+            <input type="submit" value="отправить" class="search">
+        </form>
+        </p>
         </div>
     </div>
 

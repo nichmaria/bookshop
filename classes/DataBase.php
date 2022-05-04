@@ -25,7 +25,7 @@ class DataBase
 
     public function getFeedback(int $id): array
     {
-        $sql = "SELECT feedback.name, feedback.opinion 
+        $sql = "SELECT feedback.id, feedback.name, feedback.opinion 
         FROM books INNER JOIN feedback  
            ON books.id = feedback.bookid
            WHERE books.id = $id";
@@ -46,6 +46,44 @@ class DataBase
         VALUES ('$id', '$name', '$comment');";
         $this->sth = $this->dbh->prepare($sql);
 
+        try {
+            $this->sth->execute();
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function getBooksOrdered(): array
+    {
+        $sql = 'SELECT * FROM books ORDER BY price';
+        $this->sth = $this->dbh->prepare($sql);
+
+        try {
+            $this->sth->execute();
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
+
+        return $this->sth->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteComment(int $id)
+    {
+        $sql = "DELETE FROM `bookshop`.`feedback` WHERE  `id`= $id";
+        $this->sth = $this->dbh->prepare($sql);
+
+        try {
+            $this->sth->execute();
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function addBook(string $title, string $author, string $description, string $price, string $image)
+    {
+        $sql = "INSERT INTO `bookshop`.`books` (`title`, `author`, `description`, `price`, `image`) VALUES ('$title', '$author', '$description', '$price', '$image')";
+        $this->sth = $this->dbh->prepare($sql);
+        echo $sql;
         try {
             $this->sth->execute();
         } catch (Exception $e) {

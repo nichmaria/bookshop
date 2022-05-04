@@ -6,9 +6,11 @@ require __DIR__ . '/classes/BookStorage.php';
 
 $dsn = 'mysql:host=127.0.0.1;dbname=bookshop';
 $database = new DataBase($dsn, 'root', '');
-$bookData = $database->getAllBooks();
-$bookStorage = new BookStorage($bookData);
-$books = $bookStorage->getBooks();
+$books = $database->getAllBooks();
+
+if (!empty($_POST['sort'])) {
+    $books = $database->getBooksOrdered();
+}
 
 $data = ['books' => $books, 'feedback' => 0];
 
