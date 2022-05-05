@@ -21,6 +21,13 @@
         <input type="submit" value="add new book" class="search" name="add">
     </form>
     </p>
+    <p>
+    <form action="index.php" method="post" align="center">
+        <input type="string" name="search" class="search">
+        <input type="submit" value="search" class="search">
+    </form>
+    </p>
+
 
     <div class="containeritem">
         <?php foreach ($data['books'] as $book) { ?>
@@ -31,7 +38,7 @@
                 echo "<br>";
                 echo $book['author'];
                 echo "<br>";
-                echo $book['price'];
+                echo "<b>" . $book['price'] . "</b> рублей";
                 ?>
             </div>
         <?php } ?>

@@ -1,8 +1,8 @@
 <?php
 class DataBase
 {
-    private $dbh;
-    private $sth;
+    private PDO $dbh;
+    private PDOStatement|false $sth;
 
     public function __construct(string $dsn, string $login, string $password)
     {
@@ -83,11 +83,27 @@ class DataBase
     {
         $sql = "INSERT INTO `bookshop`.`books` (`title`, `author`, `description`, `price`, `image`) VALUES ('$title', '$author', '$description', '$price', '$image')";
         $this->sth = $this->dbh->prepare($sql);
-        echo $sql;
+
         try {
             $this->sth->execute();
         } catch (Exception $e) {
             echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
         }
+    }
+
+    public function findBooks(string $search): array
+    {
+        $sql = "SELECT * FROM books 
+        WHERE author LIKE '%$search%' OR title LIKE '%$search%'";
+
+        $this->sth = $this->dbh->prepare($sql);
+
+        try {
+            $this->sth->execute();
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
+
+        return $this->sth->fetchAll(PDO::FETCH_ASSOC);
     }
 }

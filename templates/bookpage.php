@@ -13,6 +13,7 @@
     <img src="<?php echo $data['book']['image']; ?>" alt="kitten" class="image">
     <h2><?php echo $data['book']['title']; ?> </h2>
     <h3><?php echo $data['book']['author']; ?> </h3>
+    <h3><?php echo $data['book']['price']; ?> рублей </h3>
     <div class="containerinfo">
         <div class="info">
             <p><b>Описание:</b></p>
@@ -20,25 +21,26 @@
         </div>
         <div class="info">
             <p><b>Отзывы:</b></p>
+
+            <?php foreach ($data['feedback'] as $onerecord) {
+                echo "<b>" . $onerecord['name'] . "</b>";
+                echo ':';
+                echo  $onerecord['opinion'];
+            ?>
+                <form action="secondpage.php?id=<?php echo $data['book']['id']; ?>" method="post">
+                    <input type="checkbox" name="id" value="<?php echo $onerecord['id']; ?>" />
+                    <input type="submit" value="delete comment" />
+                </form>
+            <?php echo "<br>";
+            } ?>
+
             <p>
-                <?php foreach ($data['feedback'] as $onerecord) {
-                    echo "<b>" . $onerecord['name'] . "</b>";
-                    echo ':';
-                    echo  $onerecord['opinion']; ?>
             <form action="secondpage.php?id=<?php echo $data['book']['id']; ?>" method="post">
-                <input type="checkbox" name="id" value="<?php echo $onerecord['id']; ?>" />
-                <input type="submit" value="delete comment" />
+                <input type="string" value="имя" name="name" class="search">
+                <input type="string" value="ваш отзыв" name="comment" class="search">
+                <input type="submit" value="отправить" class="search">
             </form>
-        <?php echo "<br>";
-                } ?>
-        </p>
-        <p>
-        <form action="secondpage.php?id=<?php echo $data['book']['id']; ?>" method="post">
-            <input type="string" value="имя" name="name" class="search">
-            <input type="string" value="ваш отзыв" name="comment" class="search">
-            <input type="submit" value="отправить" class="search">
-        </form>
-        </p>
+            </p>
         </div>
     </div>
 
